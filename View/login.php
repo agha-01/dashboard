@@ -10,6 +10,7 @@ elseif (@$_POST["email"]!=0 || @$_POST["password"]!=null) {
   $email = $_POST["email"];
   $pass = $_POST["password"];
   Controller::$conn->a_login($email,$pass);
+  Controller::$conn->giris();
   
 }
 else{

@@ -43,100 +43,58 @@
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
-                        <th>#  id</th>
+                        <th>id</th>
                         <th>Şəkil</th>
                         <th>Başlıq</th>
                         <th>Yerləşdirilmə tarixi </th>
+                        <th>Status</th>
                         <th>Baxış sayı</th>
+                        <th>Beyenme sayı</th>
+                        <th>Beyenmeme sayı</th>                    
                         <th>edit/delete</th>
                       </tr>
                     </thead>
                     <tbody>
+                      <?php 
+                      $sql=Controller::$conn->Select('news');
+                      while ($row=mysqli_fetch_assoc($sql)) {
+                       ?>
+
                       <tr>
-                        <td>Tiger Nixon</td>
-                        <td><img src="images/placeholder.png" width="150"></td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>$320,800</td>
+                        <td><?php echo $row["id"]; ?></td>
+                         <td><img src="<?php echo $row["image"]; ?>" width="150"></td>
+                        <td><?php echo $row["basliq"]; ?></td>
+                        <td><?php echo $row["tarix"]; ?></td>
+                        <?php if ($row["status"]==1) {
+                                echo '<td class="text-success">Aktiv</td>';
+                              }
+                              else{
+                                echo '<td class="text-secondary">Passiv</td>';
+                              } ?>  
+                        <td>50</td>
+                        <td>100</td>
+                        <td>23</td>
                         <td>
-                          <a href="editnews"><button class="btn btn-success">Düzəliş et</button>
+                          <a href="editnews/<?php echo $row["id"]; ?>"><button class="btn btn-success">Düzəliş et</button>
                             </a>
-                          <button class="btn btn-danger">Sil</button>
+                           <a href="<?php echo $site_url.'delete/news_'.$row["id"]; ?>" id="deletee" ><button class="btn btn-danger">Sil</button></a>
+
+                                <script>
+                                  deletee.addEventListener("click",function(e){
+                                    if (confirm("Silmek istediyinize eminsiniz?")) {
+
+                                    }
+                                    else{
+                                      e.preventDefault();
+                                    }
+                                  });
+                                </script>
                         </td>
                       </tr>
-                      <tr>
-                        <td>Garrett Winters</td>
-                        <td><img src="images/placeholder.png" width="150"></td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>$170,750</td>
-                         <td>
-                          <a href="editnews"><button class="btn btn-success">Düzəliş et</button>
-                            </a>
-                          <button class="btn btn-danger">Sil</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Ashton Cox</td>
-                        <td><img src="images/placeholder.png" width="150"></td>
-                        <td>Junior Technical Author</td>
-                        <td>San Francisco</td>
-                        <td>$86,000</td>
-                         <td>
-                          <a href="editnews"><button class="btn btn-success">Düzəliş et</button>
-                            </a>
-                          <button class="btn btn-danger">Sil</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Cedric Kelly</td>
-                        <td><img src="images/placeholder.png" width="150"></td>
-                        <td>Senior Javascript Developer</td>
-                        <td>Edinburgh</td>
-                        <td>$433,060</td>
-                         <td>
-                          <a href="editnews"><button class="btn btn-success">Düzəliş et</button>
-                            </a>
-                          <button class="btn btn-danger">Sil</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Airi Satou</td>
-                        <td><img src="images/placeholder.png" width="150"></td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>$162,700</td>
-                         <td>
-                          <a href="editnews"><button class="btn btn-success">Düzəliş et</button>
-                            </a>
-                          <button class="btn btn-danger">Sil</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Brielle Williamson</td>
-                        <td><img src="images/placeholder.png" width="150"></td>
-                        <td>Integration Specialist</td>
-                        <td>New York</td>
-                        <td>$372,000</td>
-                         <td>
-                          <a href="editnews"><button class="btn btn-success">Düzəliş et</button>
-                            </a>
-                          <button class="btn btn-danger">Sil</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Herrod Chandler</td>
-                        <td><img src="images/placeholder.png" width="150"></td>
-                        <td>Sales Assistant</td>
-                        <td>San Francisco</td>
-                        <td>$137,500</td>
-                         <td>
-                          <a href="editnews"><button class="btn btn-success">Düzəliş et</button>
-                            </a>
-                          <button class="btn btn-danger">Sil</button>
-                        </td>
-                      </tr>
-              
+                      
+
+                    <?php } ?>
+
                     </tbody>
                   </table>
                         </div>
@@ -154,4 +112,4 @@
     <!-- Right Panel -->
 
 
-    
+  

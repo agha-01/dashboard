@@ -3,7 +3,7 @@ class Viewer{
 	public function __construct(){
 
 	}
-	public function view($str,$parametr=null){
+	public function view($str,$param=null){
 		$fileName = 'View/'.$str.'.php';
 		if ($str=="login") {
 			include $fileName;

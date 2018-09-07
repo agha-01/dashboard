@@ -1,6 +1,5 @@
-
-<!-- yeni //////////////// -->
-     <style>
+    <!-- yeni/////////////////// -->
+         <style>
        #bootstrap-data-table_filter{
         display: flex!important;
         justify-content: flex-end !important;
@@ -35,56 +34,61 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Istifadeciler</strong>
+                            <strong class="card-title">Elanlar</strong>
+                             <a href="">
+                               <h4 class="card-title float-right text-danger">Yeni elan elave et</h4>
+                             </a>
                         </div>
                         
                         <div class="card-body">
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
-                        <th scope="col">id</th>
+                        <th scope="col"># id</th>
                         <td scope="col">Şəkil</td>
-                        <th scope="col">Ad Soyad</th>
-                        <th scope="col">Yaş</th>
-                        <th scope="col">Cins</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Telefon</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">Ad</th>
+                        <th scope="col">Soyad</th>
+                        <th scope="col">Elanin adi</th>
+                        <!-- <th scope="col">text</th> -->
+                        <th scope="col">status</th>
+                        <th scope="col">tarix</th>
                         <th scope="col">Edit/Delete</th>
                       </tr>
                     </thead>
                     <tbody>
-                     <?php 
+                      <?php 
+                    $sql=Controller::$conn->select('elanlar');
+                    while ($row=mysqli_fetch_assoc($sql)) {
+                       ?>
 
-              $sql=Controller::$conn->select('users');
-              while ($row=mysqli_fetch_assoc($sql)) {
 
-                 ?>
                             <tr>
                               <th scope="row"><?php echo $row["id"]; ?></th>
                               <td><img src="<?php echo $row["image"]; ?>" width="150"></td>
-                              <td><?php echo $row["name"].' '.$row["sname"];?></td>
-                              <td><?php echo $row["b_day"]; ?></td>
-                              <td><?php echo $row["gender"]; ?></td>
-                              <td><?php echo $row["email"]; ?></td>
-                               <td><?php echo $row["phone"];?></td>
-                             <?php 
-                              if ($row["status"]==1) {
-                                echo '<td class="text-success">Aktiv</td>';
-                              }
-                              else{
-                                echo '<td class="text-secondary">Passiv</td>';
-                              }
+                              <td><?php echo $row["uname"];?></td>
+                              <td><?php echo $row["sname"];?></td>
+                              <td><?php echo $row["basliq"]; ?></td>
+                              <!-- <td><?php echo $row["text"]; ?></td> -->
+                               <td><?php 
+                                  if ($row["status"]==1) {
+                                    echo "Aktiv";
+                                  }
+                                  else{
+                                    echo "Passiv";
+                                  }
 
 
-                              ?>
+
+
+                               ?></td>
+            
+                             <td><?php echo $row["tarix"]; ?></td>
                               <td>
-                                  
                                 <a href="">
-                                  <button class="btn btn-success"><a href="editusers/<?php echo $row["id"]; ?>">Duzelis et</a></button>
+                                  <button class="btn btn-success"><a href="editelanlar/<?php echo $row["id"]; ?>">Duzelis et</a></button>
                                 </a>
-                                
-                                <a href="<?php echo $site_url.'delete/users_'.$row["id"]; ?>" id="deletee" ><button class="btn btn-danger">Sil</button></a>
+                                                              
+                                <a href="<?php echo $site_url.'delete/elanlar_'.$row["id"]; ?>" id="deletee" ><button class="btn btn-danger">Sil</button></a>
 
                                 <script>
                                   deletee.addEventListener("click",function(e){
@@ -96,14 +100,11 @@
                                     }
                                   });
                                 </script>
-                            </td>                             
-                          </tr>
-   <?php 
-}
+                        </td>
+                      </tr>
+                    <?php } ?>
 
-
-    ?>                      
-                      </tbody>
+                    </tbody>
                   </table>
                         </div>
                     </div>
@@ -120,3 +121,4 @@
     <!-- Right Panel -->
 
 
+  

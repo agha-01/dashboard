@@ -4,13 +4,31 @@
                         <strong>edit news</strong>
                       </div>
                       <div class="card-body card-block">
-                        <form action="<?php echo $site_url; ?>newsedit" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <form action="<?php echo $site_url; ?>elanlaredit" method="post" enctype="multipart/form-data" class="form-horizontal">
                 <?php 
+                  $sql=Controller::$conn->Select('elanlar');
+                  $row=mysqli_fetch_assoc($sql);
 
-                $sql=Controller::$conn->selectForEdit("news",$param);
-                      $row=mysqli_fetch_assoc($sql);
-                      
                  ?>
+                      <div class="row form-group">
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">ad</label></div>
+                            <div class="col-12 col-md-9">
+
+                              <input type="text" id="text-input" name="uname" value="<?php echo $row["uname"];?>" placeholder="Basliq" class="form-control">
+
+                              <small class="form-text text-muted">ad</small></div>
+                          </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">soyad</label></div>
+                            <div class="col-12 col-md-9">
+
+                              <input type="text" id="text-input" name="sname" value="<?php echo $row["sname"];?>" placeholder="Basliq" class="form-control">
+
+                              <small class="form-text text-muted">soyad</small></div>
+                          </div>
+
+
                           <div class="row form-group">
                             <div class="col col-md-3"><label for="text-input" class=" form-control-label">basliq</label></div>
                             <div class="col-12 col-md-9">
@@ -30,21 +48,6 @@
                               <?php echo $row["text"]; ?>
                               </textarea>
 
-                            </div>
-                          </div>
-                          <div class="row form-group">
-                            <div class="col col-md-3"><label for="select" class=" form-control-label">Kateqoriya</label></div>
-                            <div class="col-12 col-md-9">
-                              <select name="status" id="select" class="form-control">
-                                <option value="0">Kateqoriya</option>
-                                <option value="1">Olke</option>
-                                <option value="2">Siyaset</option>
-                                <option value="3">Kriminal</option>
-                                <option value="4">Sou-biznes</option>
-                                <option value="5">Idman</option>
-                                <option value="6">Maraqli</option>
-                      
-                              </select>
                             </div>
                           </div>
                           <div class="row form-group">
@@ -79,10 +82,22 @@
                          
                           <div class="row form-group">
                             <div class="col col-md-3"><label for="file-input" class=" form-control-label">File input</label></div>
-                            <div class="col-12 col-md-9"><input type="file" id="file-input" name="image" class="form-control-file"></div>
+                            <div class="col-12 col-md-9"><input type="file" id="file-input" name="image" value="" class="form-control-file">
+
+
+                            </div>
+
+
+
+
+
+
+
+
+
                           </div>
                           <input type="hidden" name="hidden" value="<?php echo $row["id"]; ?>">
-                          <input type="hidden" name="uImage" value="<?php echo $row["image"]; ?>">
+                          <input type="hidden" name="uImage" value="<?php echo $row["image"] ?>">
                           <div class="card">
                     
 	                      <div class="card-footer">
